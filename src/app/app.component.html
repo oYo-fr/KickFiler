@@ -416,6 +416,14 @@
       <span>Build for Production</span>
     </div>
   </div>
+  <div style="height: 500px; width: 600px;">
+    <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="input" style="height: 100%"  (keyup)="onKey($event)"></ngx-monaco-editor>
+  </div>
+  <div style="height: 500px; width: 600px;">
+    <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="output" style="height: 100%"></ngx-monaco-editor>
+  </div>
+  <!-- <input type="text" [(ngModel)] = "input" (keyup)="onKey($event)" />
+  <div  [innerHtml]='output'></div> -->
 
   <!-- Terminal -->
   <div class="terminal" [ngSwitch]="selection.value">
