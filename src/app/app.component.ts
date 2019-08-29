@@ -11,8 +11,11 @@ export class AppComponent {
   title = 'KickFiler';
   input: string = "    {{#each definitions}}  {{@key}}  {{/each}}";
   output: string = '';
+  selector: string = 'properties = [];\n  for (var property1 in data.definitions) {\n    properties.push({\n        name: property1,\n        value: data.definitions[property1]\n    });\n  }\n  return properties;';
   editorOptions = {theme: 'vs-dark', language: 'csharp'};
-  handlebarsEditorOptions = {theme: 'vs-dark', language: 'handlebars'}
+  selections: any = null;
+  handlebarsEditorOptions = {theme: 'vs-dark', language: 'handlebars'};
+  javascriptEditorOptions = {theme: 'vs-dark', language: 'javascript'};
   view = {
     button: 'This is the name of a button',
     numbers: [
@@ -22,9 +25,32 @@ export class AppComponent {
     ]
   };
   public constructor(){
+    try{
+      this.selections = new Function('data',this.selector)(swaggerSample);
+    }catch{
+
+    }
     this.output = Handlebars.compile(this.input)(swaggerSample);
   }
-  onKey(event: any) { // without type info
+
+  /*
+  Snippet for definitions selection:
+  properties = [];
+  for (var property1 in data.definitions) {
+    properties.push({
+        name: property1,
+        value: data.definitions[property1]
+    });
+  }
+  return properties;
+   */
+  onKey(event: any) {
+    try{
+      this.selections = new Function('data',this.selector)(swaggerSample);
+    }catch{
+
+    }
+
     this.output = Handlebars.compile(this.input)(swaggerSample);
   }
 }

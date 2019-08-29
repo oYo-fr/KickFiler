@@ -3,8 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from "@angular/forms"; 
+import { FormsModule } from "@angular/forms";
 import { MonacoEditorModule } from 'ngx-monaco-editor';
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { MonacoEditorModule } from 'ngx-monaco-editor';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    MonacoEditorModule.forRoot()
+    MonacoEditorModule.forRoot(),
+    NgxJsonViewerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
