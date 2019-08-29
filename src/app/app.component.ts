@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import * as Handlebars from 'handlebars/dist/handlebars';
 import swaggerSample from '../assets/swagger.json';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,10 +13,10 @@ export class AppComponent {
   input: string = "    {{#each definitions}}  {{@key}}  {{/each}}";
   output: string = '';
   selector: string = 'properties = [];\n  for (var property1 in data.definitions) {\n    properties.push({\n        name: property1,\n        value: data.definitions[property1]\n    });\n  }\n  return properties;';
-  editorOptions = {theme: 'vs-dark', language: 'csharp'};
+  editorOptions = {theme: 'vs-dark', language: 'csharp', automaticLayout: true};
   selections: any = null;
-  handlebarsEditorOptions = {theme: 'vs-dark', language: 'handlebars'};
-  javascriptEditorOptions = {theme: 'vs-dark', language: 'javascript'};
+  handlebarsEditorOptions = {theme: 'vs-dark', language: 'handlebars', automaticLayout: true};
+  javascriptEditorOptions = {theme: 'vs-dark', language: 'javascript', automaticLayout: true};
   view = {
     button: 'This is the name of a button',
     numbers: [
@@ -24,6 +25,20 @@ export class AppComponent {
         {name: 'Three', value: 3},
     ]
   };
+  step = 0;
+
+  setStep(index: number) {
+    this.step = index;
+  }
+
+  nextStep() {
+    this.step++;
+  }
+
+  prevStep() {
+    this.step--;
+  }
+  
   public constructor(){
     try{
       this.selections = new Function('data',this.selector)(swaggerSample);
