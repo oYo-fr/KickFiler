@@ -85,25 +85,27 @@
   }
 </style>
 
-<mat-drawer-container class="full-screen">
+<golden-layout-root></golden-layout-root>
+
+<!-- <mat-drawer-container class="full-screen">
   <mat-drawer mode="side" opened><ngx-json-viewer [json]="selections"   class="full-height"></ngx-json-viewer></mat-drawer>
   <mat-drawer-content>
       <mat-grid-list cols="2" rowHeight="2:1" >
           <mat-grid-tile colspan="1">
-            
+
     <mat-tab-group id="templateTabs" class="full-height">
         <mat-tab label="Selector" class="full-height">
             <ngx-monaco-editor [options]="javascriptEditorOptions" [(ngModel)]="selector"  class="full-height"  (keyup)="onKey($event)"></ngx-monaco-editor>
         </mat-tab>
         <mat-tab label="Handlebar" class="full-height">
-            <ngx-monaco-editor [options]="handlebarsEditorOptions" [(ngModel)]="input"  class="full-height"  (keyup)="onKey($event)"></ngx-monaco-editor>
+            
         </mat-tab>
       </mat-tab-group>
           </mat-grid-tile>
           <mat-grid-tile colspan="1">
               <ngx-monaco-editor [options]="javascriptEditorOptions" [(ngModel)]="output"  class="full-height"></ngx-monaco-editor>
           </mat-grid-tile>
-          </mat-grid-list>
+          </mat-grid-list> -->
     <!-- <mat-tab-group id="templateTabs" class="full-height">
       <mat-tab label="Selector" class="full-height">
           <ngx-monaco-editor [options]="javascriptEditorOptions" [(ngModel)]="selector"  class="full-height"  (keyup)="onKey($event)"></ngx-monaco-editor>
@@ -115,8 +117,8 @@
           <ngx-monaco-editor [options]="javascriptEditorOptions" [(ngModel)]="output"  class="full-height"></ngx-monaco-editor>
       </mat-tab>
     </mat-tab-group> -->
-  </mat-drawer-content>
-</mat-drawer-container>
+  <!-- </mat-drawer-content>
+</mat-drawer-container> -->
 
 
 

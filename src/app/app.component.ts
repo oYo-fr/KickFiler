@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
-import * as Handlebars from 'handlebars/dist/handlebars';
-import swaggerSample from '../assets/swagger.json';
 
+import { AppContext } from './AppContext';
 
 @Component({
   selector: 'app-root',
@@ -10,42 +9,11 @@ import swaggerSample from '../assets/swagger.json';
 })
 export class AppComponent {
   title = 'KickFiler';
-  input: string = "    {{#each definitions}}  {{@key}}  {{/each}}";
-  output: string = '';
-  selector: string = 'properties = [];\n  for (var property1 in data.definitions) {\n    properties.push({\n        name: property1,\n        value: data.definitions[property1]\n    });\n  }\n  return properties;';
   editorOptions = {theme: 'vs-dark', language: 'csharp', automaticLayout: true};
-  selections: any = null;
-  handlebarsEditorOptions = {theme: 'vs-dark', language: 'handlebars', automaticLayout: true};
   javascriptEditorOptions = {theme: 'vs-dark', language: 'javascript', automaticLayout: true};
-  view = {
-    button: 'This is the name of a button',
-    numbers: [
-        {name: 'One', value: 1},
-        {name: 'Two', value: 2},
-        {name: 'Three', value: 3},
-    ]
-  };
-  step = 0;
 
-  setStep(index: number) {
-    this.step = index;
-  }
+  public constructor(public context: AppContext){
 
-  nextStep() {
-    this.step++;
-  }
-
-  prevStep() {
-    this.step--;
-  }
-  
-  public constructor(){
-    try{
-      this.selections = new Function('data',this.selector)(swaggerSample);
-    }catch{
-
-    }
-    this.output = Handlebars.compile(this.input)(swaggerSample);
   }
 
   /*
@@ -59,13 +27,5 @@ export class AppComponent {
   }
   return properties;
    */
-  onKey(event: any) {
-    try{
-      this.selections = new Function('data',this.selector)(swaggerSample);
-    }catch{
 
-    }
-
-    this.output = Handlebars.compile(this.input)(swaggerSample);
-  }
 }
