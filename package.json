@@ -28,6 +28,7 @@
     "jquery": "^3.4.1",
     "ngx-golden-layout": "0.0.18",
     "ngx-json-viewer": "^2.4.0",
+    "ngx-markdown": "^8.1.0",
     "ngx-monaco-editor": "^8.0.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",

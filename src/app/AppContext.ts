@@ -2,10 +2,11 @@
 import { Injectable } from '@angular/core';
 import * as Handlebars from 'handlebars/dist/handlebars';
 import swaggerSample from '../assets/swagger.json';
+import { MarkdownService } from 'ngx-markdown';
 
 @Injectable()
 export class AppContext {
-	mustache: string = "public class {{name}}{\n}";
+	mustache: string = "public class __{{name}}__{\n}";
 	selector: string = 'properties = [];\n  for (var property1 in data.definitions) {\n    properties.push({\n        name: property1,\n        value: data.definitions[property1]\n    });\n  }\n  return properties;';
 	selections: any = null;
 	datasource: any = {
@@ -15,7 +16,7 @@ export class AppContext {
 	}
 	results: any = []
 
-	public constructor() {
+	public constructor(private markdownService: MarkdownService) {
 		this.datasource.content = JSON.stringify(swaggerSample, null, 2);
 
 		this.datasource.result = JSON.parse(this.datasource.content);
@@ -54,6 +55,7 @@ export class AppContext {
 
 		this.results.forEach(r => {
 			r.output = Handlebars.compile(this.mustache)(r.selection)
+			r.output = this.markdownService.compile(r.output)
 		});
 	}
 }

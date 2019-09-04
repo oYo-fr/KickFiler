@@ -19,6 +19,7 @@ import { OutputViewerComponent } from './output-viewer/output-viewer.component';
 import { DatasourceEditorComponent } from './datasource-editor/datasource-editor.component';
 import { SelectorEditorComponent } from './selector-editor/selector-editor.component';
 import { SelectionViewerComponent } from './selection-viewer/selection-viewer.component'
+import { MarkdownModule } from 'ngx-markdown';
 
 window['$'] = $;
 
@@ -87,7 +88,8 @@ const config: GoldenLayoutConfiguration = {
 		MatExpansionModule,
 		MatGridListModule,
 		MatSidenavModule,
-		GoldenLayoutModule.forRoot(config)
+		GoldenLayoutModule.forRoot(config),
+		MarkdownModule.forRoot()
 	],
 	providers: [AppContext],
 	bootstrap: [AppComponent],
