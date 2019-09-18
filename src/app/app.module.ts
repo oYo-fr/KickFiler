@@ -7,11 +7,19 @@ import { FormsModule } from "@angular/forms";
 import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule, MatButtonModule } from '@angular/material'
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { GoldenLayoutModule, GoldenLayoutConfiguration, ComponentConfiguration } from '@embedded-enterprises/ng6-golden-layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatFormFieldModule, MatInputModule, MatSelectModule } from '@angular/material';
+import { MatTreeModule } from '@angular/material/tree';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
+import { GoldenLayoutModule, GoldenLayoutConfiguration, ComponentConfiguration, GoldenLayoutService } from '@embedded-enterprises/ng6-golden-layout';
 import * as $ from 'jquery';
 import { HandlebarEditorComponent } from './handlebar-editor/handlebar-editor.component';
 import { AppContext } from './AppContext';
@@ -89,7 +97,17 @@ const config: GoldenLayoutConfiguration = {
 		MatGridListModule,
 		MatSidenavModule,
 		GoldenLayoutModule.forRoot(config),
-		MarkdownModule.forRoot()
+		MarkdownModule.forRoot(),
+		MatTreeModule,
+		MatIconModule,
+		MatButtonModule,
+		MatToolbarModule,
+		MatMenuModule,
+		MatDividerModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatSelectModule,
+		MatSnackBarModule
 	],
 	providers: [AppContext],
 	bootstrap: [AppComponent],

@@ -1,130 +1,243 @@
 <style>
+	.content {
+		display: flex;
+		margin: 0px auto;
+		padding: 0 0px;
+		flex-direction: column;
+		align-items: center;
+	}
 
-  .content {
-    display: flex;
-    margin: 0px auto;
-    padding: 0 0px;
-    flex-direction: column;
-    align-items: center;
-  }
+	a,
+	a:visited,
+	a:hover {
+		color: #1976d2;
+		text-decoration: none;
+	}
 
-  a,
-  a:visited,
-  a:hover {
-    color: #1976d2;
-    text-decoration: none;
-  }
+	a:hover {
+		color: #125699;
+	}
 
-  a:hover {
-    color: #125699;
-  }
+	.terminal {
+		position: relative;
+		width: 80%;
+		max-width: 600px;
+		border-radius: 6px;
+		padding-top: 45px;
+		margin-top: 8px;
+		overflow: hidden;
+		background-color: rgb(15, 15, 16);
+	}
 
-  .terminal {
-    position: relative;
-    width: 80%;
-    max-width: 600px;
-    border-radius: 6px;
-    padding-top: 45px;
-    margin-top: 8px;
-    overflow: hidden;
-    background-color: rgb(15, 15, 16);
-  }
+	.terminal::before {
+		content: "\2022 \2022 \2022";
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 4px;
+		background: rgb(58, 58, 58);
+		color: #c2c3c4;
+		width: 100%;
+		font-size: 2rem;
+		line-height: 0;
+		padding: 14px 0;
+		text-indent: 4px;
+	}
 
-  .terminal::before {
-    content: "\2022 \2022 \2022";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 4px;
-    background: rgb(58, 58, 58);
-    color: #c2c3c4;
-    width: 100%;
-    font-size: 2rem;
-    line-height: 0;
-    padding: 14px 0;
-    text-indent: 4px;
-  }
-
-  .terminal pre {
-    font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
-    color: white;
-    padding: 0 1rem 1rem;
-    margin: 0;
-  }
-
+	.terminal pre {
+		font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+		color: white;
+		padding: 0 1rem 1rem;
+		margin: 0;
+	}
 
 
-  /* Responsive Styles */
-  @media screen and (max-width: 767px) {
 
-    .card-container > *:not(.circle-link) ,
-    .terminal {
-      width: 100%;
-    }
+	/* Responsive Styles */
+	@media screen and (max-width: 767px) {
 
-    .card:not(.highlight-card) {
-      height: 16px;
-      margin: 8px 0;
-    }
+		.card-container>*:not(.circle-link),
+		.terminal {
+			width: 100%;
+		}
 
-    .card.highlight-card span {
-      margin-left: 72px;
-    }
+		.card:not(.highlight-card) {
+			height: 16px;
+			margin: 8px 0;
+		}
 
-    svg#rocket-smoke {
-      right: 120px;
-      transform: rotate(-5deg);
-    }
-  }
+		.card.highlight-card span {
+			margin-left: 72px;
+		}
 
-  @media screen and (max-width: 575px) {
-    svg#rocket-smoke {
-      display: none;
-      visibility: hidden;
-    }
-  }
+		svg#rocket-smoke {
+			right: 120px;
+			transform: rotate(-5deg);
+		}
+	}
+
+	@media screen and (max-width: 575px) {
+		svg#rocket-smoke {
+			display: none;
+			visibility: hidden;
+		}
+	}
+
 </style>
 
-<golden-layout-root></golden-layout-root>
 
-<!-- <mat-drawer-container class="full-screen">
-  <mat-drawer mode="side" opened><ngx-json-viewer [json]="selections"   class="full-height"></ngx-json-viewer></mat-drawer>
-  <mat-drawer-content>
-      <mat-grid-list cols="2" rowHeight="2:1" >
-          <mat-grid-tile colspan="1">
+<mat-grid-list cols="10" rows="2" class="full-screen">
+	<mat-toolbar colspan="10">
+		<button mat-button [matMenuTriggerFor]="menuFolder">
+			<mat-icon>folder-open</mat-icon>&nbsp;Project: {{contextService.SelectedProject.Name}}
+		</button>
 
-    <mat-tab-group id="templateTabs" class="full-height">
-        <mat-tab label="Selector" class="full-height">
-            <ngx-monaco-editor [options]="javascriptEditorOptions" [(ngModel)]="selector"  class="full-height"  (keyup)="onKey($event)"></ngx-monaco-editor>
-        </mat-tab>
-        <mat-tab label="Handlebar" class="full-height">
-            
-        </mat-tab>
-      </mat-tab-group>
-          </mat-grid-tile>
-          <mat-grid-tile colspan="1">
-              <ngx-monaco-editor [options]="javascriptEditorOptions" [(ngModel)]="output"  class="full-height"></ngx-monaco-editor>
-          </mat-grid-tile>
-          </mat-grid-list> -->
-    <!-- <mat-tab-group id="templateTabs" class="full-height">
-      <mat-tab label="Selector" class="full-height">
-          <ngx-monaco-editor [options]="javascriptEditorOptions" [(ngModel)]="selector"  class="full-height"  (keyup)="onKey($event)"></ngx-monaco-editor>
-      </mat-tab>
-      <mat-tab label="Handlebar" class="full-height">
-          <ngx-monaco-editor [options]="handlebarsEditorOptions" [(ngModel)]="input"  class="full-height"  (keyup)="onKey($event)"></ngx-monaco-editor>
-      </mat-tab>
-      <mat-tab label="output" class="full-height">
-          <ngx-monaco-editor [options]="javascriptEditorOptions" [(ngModel)]="output"  class="full-height"></ngx-monaco-editor>
-      </mat-tab>
-    </mat-tab-group> -->
-  <!-- </mat-drawer-content>
-</mat-drawer-container> -->
+		<mat-menu #menuFolder="matMenu" [overlapTrigger]="false">
+			<button mat-menu-item>
+				<mat-icon>plus</mat-icon>
+				<span>Create new project</span>
+			</button>
+			<mat-divider></mat-divider>
+			<button mat-menu-item *ngFor="let project of contextService.Projects">
 
+					<mat-icon *ngIf="template != contextService.SelectedProject"></mat-icon>
+					<mat-icon *ngIf="template === contextService.SelectedProject">play_arrow</mat-icon>
+				<span>{{project.Name}}</span>
+			</button>
+		</mat-menu>
+		<button mat-button [matMenuTriggerFor]="menu">
+			<mat-icon>book</mat-icon>&nbsp;Template: {{contextService.SelectedTemplate.Name}}
+		</button>
 
+		<mat-menu #menu="matMenu" [overlapTrigger]="false">
+			<button mat-menu-item (click)="CreateNewTemplate()">
+				<mat-icon>plus</mat-icon>
+				<span>Create new template</span>
+			</button>
+			<mat-divider></mat-divider>
+			<button mat-menu-item *ngFor="let template of contextService.Templates" (click)="SelectTemplate(template)">
+				<mat-icon *ngIf="template != contextService.SelectedTemplate"></mat-icon>
+				<mat-icon *ngIf="template === contextService.SelectedTemplate">play_arrow</mat-icon>
+				<span>{{template.Name}}</span>
+			</button>
+		</mat-menu>
 
+		<span style="flex: 1 1 auto;"></span>
+		{{contextService.CurrentStep}}
+	</mat-toolbar>
 
+	<mat-grid-tile colspan="2" row="2" class="full-height" style="overflow-y: auto">
+		<mat-tab-group id="templateTabs" class="full-screen" mat-stretch-tabs>
+			<mat-tab label="Raw data" class="full-screen">
 
+				<mat-tree [treeControl]="nestedTreeControl" [dataSource]="nestedDataSource"
+					class="example-tree full-screen">
+					<mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+						<li class="mat-tree-node"><button mat-icon-button
+								disabled></button>{{node.key}}<code>:&nbsp;{{node.value}}</code></li>
+					</mat-tree-node>
+					<mat-nested-tree-node *matTreeNodeDef="let node; when: hasNestedChild">
+						<li>
+							<div class="mat-tree-node">
+								<button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.key">
+									<mat-icon class="mat-icon-rtl-mirror">
+										{{nestedTreeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+									</mat-icon>
+								</button>
+								{{node.key}}
+							</div>
+							<ul [class.example-tree-invisible]="!nestedTreeControl.isExpanded(node)">
+								<ng-container matTreeNodeOutlet></ng-container>
+							</ul>
+						</li>
+					</mat-nested-tree-node>
+				</mat-tree>
+			</mat-tab>
+			<mat-tab label="Selections" class="full-screen">
+				<mat-tree [treeControl]="nestedTreeControlSelections" [dataSource]="nestedDataSourceSelections"
+					class="example-tree full-screen">
+					<mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+						<li class="mat-tree-node"><button mat-icon-button
+								disabled></button>{{node.key}}<code>:&nbsp;{{node.value}}</code></li>
+					</mat-tree-node>
+					<mat-nested-tree-node *matTreeNodeDef="let node; when: hasNestedChild">
+						<li>
+							<div class="mat-tree-node">
+								<button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.key">
+									<mat-icon class="mat-icon-rtl-mirror">
+										{{nestedTreeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+									</mat-icon>
+								</button>
+								{{node.key}}
+							</div>
+							<ul [class.example-tree-invisible]="!nestedTreeControlSelections.isExpanded(node)">
+								<ng-container matTreeNodeOutlet></ng-container>
+							</ul>
+						</li>
+					</mat-nested-tree-node>
+				</mat-tree>
+			</mat-tab>
+		</mat-tab-group>
 
+	</mat-grid-tile>
+	<mat-grid-tile colspan="4" row="2" class="full-height">
+		<mat-tab-group id="templateTabs" class="full-screen" mat-stretch-tabs>
+			<mat-tab label="Project" class="full-screen">
+				<mat-tab-group id="templateTabs" class="full-screen" backgroundColor="primary">
+					<mat-tab label="Data source" class="full-screen">
+						<ngx-monaco-editor [options]="jsonEditorOptions"
+							[(ngModel)]="contextService.SelectedProject.DataSource" class="full-screen"
+							(keyup)="onChangeProjectDataSource($event)"></ngx-monaco-editor>
+					</mat-tab>
+					<mat-tab label="Settings" class="full-screen">
+					</mat-tab>
+				</mat-tab-group>
+			</mat-tab>
+			<mat-tab label="Template" class="full-screen">
+				<mat-tab-group id="SelectorTab" class="full-screen" backgroundColor="primary">
+					<mat-tab label="Selector" class="full-screen">
+						<ngx-monaco-editor [options]="javascriptEditorOptions"
+							[(ngModel)]="contextService.SelectedTemplate.Selector" class="full-screen"
+							(keyup)="onKey($event)"></ngx-monaco-editor>
+					</mat-tab>
+					<mat-tab label="Mustache" class="full-screen">
+						<ngx-monaco-editor [options]="editorOptions"
+							[(ngModel)]="contextService.SelectedTemplate.Mustache" class="full-screen"
+							(keyup)="onKeyMustache($event)"></ngx-monaco-editor>
+					</mat-tab>
+					<mat-tab label="Settings" class="full-screen">
+						<mat-form-field>
+							<mat-label>Template output type</mat-label>
+							<mat-select [(value)]="contextService.SelectedTemplate.OutputType" (selectionChange)="Save($event.value)">
+							  <mat-option *ngFor="let templateOutputType of templateOutputTypes" [value]="templateOutputType">
+								{{templateOutputType}}
+							  </mat-option>
+							</mat-select>
+						  </mat-form-field>
+					</mat-tab>
+				</mat-tab-group>
+			</mat-tab>
+		</mat-tab-group>
+	</mat-grid-tile>
+	<mat-grid-tile colspan="4" row="2" class="full-height">
+		<mat-tab-group id="templateTabs" class="full-screen">
+			<mat-tab label="Outputs" class="full-screen">
 
+				<mat-tab-group id="templateTabs" class="full-screen" backgroundColor="primary">
+					<mat-tab *ngFor="let result of contextService.Results" label="{{result.Data.filename}}"
+						class="full-screen">
+						<!-- <ngx-monaco-editor [options]="outputEditorOptions" [(ngModel)]="context.results[0].output" class="full-height">
+</ngx-monaco-editor> -->
+<!-- <markdown [data]="context.results[0].output"></markdown> -->
+						<ngx-monaco-editor [options]="javascriptEditorOptions" [(ngModel)]="result.Content" *ngIf="contextService.SelectedTemplate.OutputType != 'Json'"
+							class="full-screen">
+						</ngx-monaco-editor>
+						<markdown [data]="result.Content" *ngIf="contextService.SelectedTemplate.OutputType === 'Json'"></markdown>
+					</mat-tab>
+				</mat-tab-group>
+			</mat-tab>
+		</mat-tab-group>
+	</mat-grid-tile>
+</mat-grid-list>
 
 <router-outlet></router-outlet>
