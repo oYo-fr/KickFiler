@@ -24,7 +24,7 @@
     "@angular/router": "~8.2.3",
     "@embedded-enterprises/ng6-golden-layout": "0.0.12",
     "golden-layout": "^1.5.7",
-    "handlebars": "^4.1.2",
+    "handlebars": "^4.5.3",
     "jquery": "^3.4.1",
     "ngx-golden-layout": "0.0.18",
     "ngx-json-viewer": "^2.4.0",
